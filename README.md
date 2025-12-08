@@ -1,0 +1,2 @@
+# Grup17MetinTabanliGiysiKatalogu
+A
