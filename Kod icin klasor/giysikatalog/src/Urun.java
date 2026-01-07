@@ -4,38 +4,35 @@
 public class Urun {
     private int id;
     private String urunAdi;
-    private String kategori;
     private String beden;
     private String renk;
     private double fiyat;
-    private String aciklama;
 
     /**
      * urun sınıfın yapıcı metodu (constructor)
      */
-    public Urun(int id, String urunAdi, String kategori, String beden, String renk, double fiyat, String aciklama){
+    public Urun(int id, String urunAdi, String beden, String renk, double fiyat){
         this.id = id;
         this.urunAdi = urunAdi;
-        this.kategori = kategori;
+        this.beden = beden;
         this.renk = renk;
         this.fiyat = fiyat;
-        this.aciklama = aciklama;
     }
 
     public int getId(){
         return id;
     }
-
-    public String getUrunAdi(){
-        return urunAdi;
+    public void setUrunAdi(String urunAdi){
+        this.urunAdi = urunAdi;
     }
-
-    public String getKategori(){
-        return kategori;
+    public void setBeden(String beden){
+        this.beden = beden;
     }
-
-    public double getFiyat(){
-        return fiyat;
+    public void setRenk(String renk){
+        this.renk = renk;
+    }
+    public void setFiyat(double fiyat){
+        this.fiyat = fiyat;
     }
 
     /**
@@ -44,10 +41,8 @@ public class Urun {
     public void urunDetaylariniGoster(){
         System.out.println("Ürün ID:" + id);
         System.out.println("Ürün Adı:" + urunAdi);
-        System.out.println("Kategori:" + kategori);
         System.out.println("Beden:" + beden);
         System.out.println("Renk:" + renk);
         System.out.println("Fiyat:" + fiyat);
-        System.out.println("Açıklama:" + aciklama);
     }
 }
