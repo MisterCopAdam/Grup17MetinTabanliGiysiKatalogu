@@ -1,19 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Katalog sınıfı giysilerin listesini ve
+ * bu liste üzerinde yapılan işlemleri yönetir
+ */
+
 public class Katalog {
     // Attribute
-    private List<Urun> urunler;
+    private List<Urun> urunler = new ArrayList<>();
 
-    // Constructor
-    public Katalog() {
-        urunler = new ArrayList<>();
-    }
+    // otomatik ID için sayaç
+    private int id = 1;
 
-    // Ürün ekle
-    public void urunEkle(Urun urun) {
-        urunler.add(urun);
-        System.out.println("Ürün kataloğa eklendi.");
+    /**
+     * Katalog oluşturulken
+     * başlangıçta bazı giysiler eklenir
+     */
+    public Katalog(){
+        urunler.add(new Urun(id++, "Beyaz Tişört", "M", "Beyaz", 199.99));
+        urunler.add(new Urun(id++, "Kot pantolon", "L", "Mavi", 499.99));
     }
 
     // Kataloğu görüntüle
@@ -28,25 +34,17 @@ public class Katalog {
         }
     }
 
-    // Ürün ara (ürün adına göre)
-    public void urunAra(String urunAdi) {
-        boolean bulundu = false;
-        for (Urun urun : urunler) {
-            if (urun.getUrunAdi().equalsIgnoreCase(urunAdi)) {
-                urun.urunDetaylariniGoster();
-                bulundu = true;
-            }
-        }
-        if (!bulundu) {
-            System.out.println("Aranan ürün bulunamadı.");
-        }
+    // Ürün ekle
+    public void urunEkle(String urunAdi, String beden, String renk, double fiyat) {
+        urunler.add(new Urun(id++, urunAdi, beden, renk, fiyat));
+        System.out.println("Ürün kataloğa eklendi.");
     }
 
     // Ürün sil (id'ye göre)
     public void urunSil(int id) {
-        for (Urun urun : urunler) {
-            if (urun.getId() == id) {
-                urunler.remove(urun);
+        for (int i = 0; i < urunler.size(); i++) {
+            if (urunler.get(i).getId() == id){
+                urunler.remove(i);
                 System.out.println("Ürün silindi.");
                 return;
             }
@@ -55,11 +53,13 @@ public class Katalog {
     }
 
     //  Ürün düzenle (sadece ad ve fiyat)
-    public void urunDuzenle(int id, String yeniAd, double yeniFiyat) {
+    public void urunDuzenle(int id, String urunAdi, String beden, String renk, double fiyat) {
         for (Urun urun : urunler) {
             if (urun.getId() == id) {
-                // setter yok, bu yüzden basit çözüm
-                System.out.println("Ürün güncellendi (sınırlı).");
+                urun.setUrunAdi(urunAdi);
+                urun.setBeden(beden);
+                urun.setRenk(renk);
+                urun.setFiyat(fiyat);
                 return;
             }
         }
