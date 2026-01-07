@@ -1,3 +1,4 @@
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +35,41 @@ public class Katalog {
         }
     }
 
+    /**
+     * Giysi bilgilerinin boş olup olmadığını kontrol eder
+     */
+    private boolean bilgileriGecerliMi(String urunAdi, String beden, String renk, double fiyat){
+
+        if (urunAdi.equals("")){
+            System.out.println("Ürün adı boş bırakılamaz.");
+            return false;
+        }
+
+        if (beden.equals("")){
+            System.out.println("Beden boş bırakılamaz.");
+            return false;
+        }
+
+        if (renk.equals("")){
+            System.out.println("Renk boş bırakılamaz.");
+            return false;
+        }
+
+        if (fiyat <= 0){
+            System.out.println("Fiyat 0'dan büyük olmalıdır.");
+            return false;
+        }
+
+        return true;
+    }
+
     // Ürün ekle
     public void urunEkle(String urunAdi, String beden, String renk, double fiyat) {
+
+        if (!bilgileriGecerliMi(urunAdi, beden, renk, fiyat)){
+            System.out.println("Ürün kataloğa eklenemedi.");
+            return;
+        }
         urunler.add(new Urun(id++, urunAdi, beden, renk, fiyat));
         System.out.println("Ürün kataloğa eklendi.");
     }
@@ -54,6 +88,12 @@ public class Katalog {
 
     //  Ürün düzenle (sadece ad ve fiyat)
     public void urunDuzenle(int id, String urunAdi, String beden, String renk, double fiyat) {
+
+        if (!bilgileriGecerliMi(urunAdi, beden, renk, fiyat)){
+            System.out.println("Giysi güncellenemedi.");
+            return;
+        }
+
         for (Urun urun : urunler) {
             if (urun.getId() == id) {
                 urun.setUrunAdi(urunAdi);
